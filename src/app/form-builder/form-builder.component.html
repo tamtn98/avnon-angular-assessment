@@ -1,0 +1,48 @@
+<div class="form-builder">
+  <!-- <h1>form-builder works!</h1> -->
+
+  <div class="form-builder__question-list">
+    <p *ngIf="!questions.length">
+      You haven't added any question. Please add one.
+    </p>
+
+    <div
+      class="form-builder__question-list__question"
+      *ngFor="let question of questions; index as i"
+    >
+      <!-- <mat-divider *ngIf="i > 0"></mat-divider> -->
+
+      <!-- Because this is a custom label, it does not belong to the mat-form-field
+      So we have to add the 'required' asterisk ourselves -->
+      <mat-label class="form-builder__question-list__question__lbl">
+        {{ question.value }}
+        <span *ngIf="question.required"> *</span>
+      </mat-label>
+      <mat-form-field>
+        <textarea
+          matInput
+          [rows]="2"
+          [(ngModel)]="question.answer"
+          [required]="question.required"
+        ></textarea>
+        <!-- <ng-container [ngSwitch]="question.type">
+        </ng-container> -->
+      </mat-form-field>
+    </div>
+  </div>
+
+  <a class="form-builder__add-question-anchor" (click)="addQuestion()"
+    >Add New Question</a
+  >
+
+  <button
+    mat-raised-button
+    class="form-builder__review-questions-btn"
+    routerLink="/form/answers"
+    [disabled]="!questions.length || !isAllQuestionsFilled"
+  >
+    Review My Answers ›
+  </button>
+</div>
+
+<ng-template #addQuestionDialog> </ng-template>

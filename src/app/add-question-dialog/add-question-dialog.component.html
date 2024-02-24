@@ -1,0 +1,39 @@
+<p mat-dialog-title>Add a New Question</p>
+
+<mat-dialog-content>
+  <div class="content">
+    <mat-form-field>
+      <mat-label>Question Type</mat-label>
+      <mat-select [(ngModel)]="question.type">
+        @for (type of questionTypes; track type) {
+        <mat-option [value]="type.value" [disabled]="type.value === 'checkbox'">
+          {{ type.label }}
+        </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <ng-container [ngSwitch]="question.type">
+      <div *ngSwitchCase="'checkbox'">
+        <!-- I don't have enough time for Checkbox case :( -->
+      </div>
+
+      <mat-form-field *ngSwitchCase="'paragraph'">
+        <mat-label>Question</mat-label>
+
+        <textarea matInput [rows]="2" [(ngModel)]="question.value"></textarea>
+      </mat-form-field>
+    </ng-container>
+
+    <mat-checkbox [(ngModel)]="question.required">
+      This question is required
+    </mat-checkbox>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="isValid" (click)="submitQuestion()">
+    Submit
+  </button>
+</mat-dialog-actions>

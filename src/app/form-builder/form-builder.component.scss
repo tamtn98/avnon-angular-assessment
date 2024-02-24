@@ -1,0 +1,33 @@
+.form-builder {
+  width: 500px;
+  // border: 1px solid #000;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__question-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    &__question {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &__lbl {
+        // update if needed
+      }
+    }
+  }
+
+  &__add-question-anchor {
+    display: block;
+    text-decoration: underline;
+    color: #0000ff;
+    cursor: pointer;
+  }
+}
+
+
